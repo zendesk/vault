@@ -8,16 +8,12 @@ moduleForModel('vault', {
   needs: []
 });
 
-test('it exists', function(assert) {
-  var model = this.subject();
-  // var store = this.store();
-  assert.ok(!!model);
+test('unsealed returns false when sealed', function(assert) {
+  var sealed = this.subject({sealed: true});
+  assert.equal(sealed.get('unsealed'), false);
 });
 
-test('unsealed', function(assert) {
-  var model = this.subject({sealed: true});
-  assert.equal(model.get('unsealed'), false);
-
-  model.set('sealed', false);
-  assert.equal(model.get('unsealed'), true);
+test('unsealed returns true when unsealed', function(assert) {
+  var sealed = this.subject({sealed: false});
+  assert.equal(sealed.get('unsealed'), true);
 });
