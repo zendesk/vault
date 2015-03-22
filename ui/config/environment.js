@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
+    vaultApiAddress: 'http://127.0.0.1:8200',
     modulePrefix: 'ui',
     environment: environment,
     baseURL: '/',
