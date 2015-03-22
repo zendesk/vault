@@ -1,0 +1,11 @@
+{{#if model.unsealed}}
+
+    {{partial "sidebar"}}
+
+    <div class="content">
+        {{outlet}}
+    </div>
+
+{{else}}
+    Vault is sealed
+{{/if}}
