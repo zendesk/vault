@@ -8,14 +8,14 @@ moduleFor('view:vault');
 
 test('templateName returns sealed template when sealed', function(assert) {
   var view = this.subject();
-  view.content = {unsealed: false};
+  view.controller.model = {unsealed: false};
 
   assert.equal(view.get('templateName'), 'vault-sealed');
 });
 
 test('templateName returns unsealed template when unsealed', function(assert) {
   var view = this.subject();
-  view.content = {unsealed: true};
+  view.controller.model = {unsealed: true};
 
   assert.equal(view.get('templateName'), 'vault-unsealed');
 });
