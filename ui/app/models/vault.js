@@ -9,5 +9,5 @@ export default DS.Model.extend({
   n: attr('number'),
   progress: attr('number'),
 
-  unsealed: Ember.computed.not('sealed'),
+  unsealed: Ember.computed.equal('sealed', false),
 });
