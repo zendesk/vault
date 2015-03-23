@@ -26,16 +26,18 @@ export default Ember.View.extend({
     // Apply the slideout to the correct element when the vault
     // is changing states. This animation keeps it's style
     //
-    if (this.get('unsealed') === true) {
-      // The sealed modal
-      this.$('.modal').addClass('slide-out');
-    } else {
-      // Main content class
-      this.$('.vault').addClass('slide-out');
-    }
+    Ember.run.later(this, function() {
+      if (this.get('unsealed') === true) {
+        // The sealed modal
+        this.$('.modal').addClass('slide-out');
+      } else {
+        // Main content class
+        this.$('.vault').addClass('slide-out');
+      }
+    }, 500).bind(this);
 
     Ember.run.later(this, function() {
       this.rerender();
-    }, 250).bind(this);
+    }, 1000).bind(this);
   }.observes('unsealed'),
 });

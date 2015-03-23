@@ -1,4 +1,7 @@
 @import "animations";
+@import "octicons";
+
+$vault: #00ABE0;
 
 body {
     background-color: #fff;
@@ -24,7 +27,7 @@ header {
 }
 
 a, a.visited {
-    color: #00ABE0;
+    color: $vault;
     text-decoration: none;
 }
 
@@ -53,12 +56,11 @@ a, a.visited {
     display: inline-block;
 }
 
-.modal-logo {
-    background: url("/icon.png") center 13px no-repeat;
-    background-size: 25px;
+.modal-icon {
     float: left;
-    height: 50px;
     width: 50px;
+    height: 100px;
+    padding-top: 27px;
     display: inline-block;
     padding-right: 20px;
     margin-left: 50px;
@@ -92,6 +94,19 @@ p.small {
 .unseal-message {
     font-size: 14px;
     margin-top: 0px;
+}
+
+.unseal-lock {
+  background-image:
+    linear-gradient(
+      to bottom,
+      #000 100%,
+      $vault 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 60px;
 }
 
 /*
