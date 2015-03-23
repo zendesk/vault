@@ -1,0 +1,83 @@
+body {
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    color: #222;
+    font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.container {
+    min-width: 800px;
+    display: table;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a, a.visited {
+    color: #00BFE0;
+    text-decoration: none;
+}
+
+.overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.overflow:hover {
+    text-overflow: visible;
+    overflow: visible;
+}
+
+.modal {
+    width: 400px;
+    height: auto;
+    margin: 200px auto 0 auto;
+}
+
+.modal pre {
+    float: left;
+    font-size: 12px;
+    width: 100%;
+    display: inline-block;
+}
+
+.modal-logo {
+    background: url("/icon.png") center 13px no-repeat;
+    background-size: 25px;
+    float: left;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    padding-right: 20px;
+    margin-left: 50px;
+    border-right: 1px #eee solid;
+}
+
+.modal-description {
+    float: left;
+    padding-top: 4px;
+    padding-left: 20px;
+    width: 200px;
+    display: inline-block;
+}
+
+p.small {
+    font-size: 12px;
+    color: #999;
+}
+
+/*
+    template: vault-sealed
+*/
+
+.unseal-progress {
+    font-size: 22px;
+}
+
+.unseal-message {
+    font-size: 14px;
+    margin-top: 0px;
+}
