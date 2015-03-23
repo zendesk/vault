@@ -1,5 +1,5 @@
-import ENV from "ui/config/environment";
 import Clock from 'ui/models/clock';
+import ENV from "ui/config/environment";
 import Ember from 'ember';
 
 export default Ember.Route.extend({
@@ -15,6 +15,9 @@ export default Ember.Route.extend({
       this.store.createRecord('vault', {
         id: "default",
       });
+
+      // Returns a promise to update the initial value;
+      return this.fetchVault();
     }
   },
 
