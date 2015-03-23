@@ -23,6 +23,12 @@ export default Ember.View.extend({
   // templates.
   //
   watchSealStatus: function() {
+    // Ensure that we don't have a flash of 0 progress
+    if (this.get('unsealed') === true) {
+      this.set('controller.model.progress', this.get('controller.model.t'))
+    }
+
+
     // Apply the slideout to the correct element when the vault
     // is changing states. This animation keeps it's style
     //
