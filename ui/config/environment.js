@@ -9,6 +9,10 @@ module.exports = function(environment) {
     locationType: 'history',
     clockPollInterval: 10000, // 10 seconds, our default
 
+    contentSecurityPolicy: {
+      'connect-src': "'self' 127.0.0.1:8200",
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
