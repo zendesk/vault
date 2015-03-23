@@ -7,6 +7,8 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'history',
+    clockPollInterval: 10000, // 10 seconds, our default
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -26,6 +28,9 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    // Faster polls in development
+    ENV.clockPollInterval = 1000; // 1 second
   }
 
   if (environment === 'test') {

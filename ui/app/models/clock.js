@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'ui/config/environment';
 
 export default Ember.Object.extend({
   second: null,
@@ -6,7 +7,7 @@ export default Ember.Object.extend({
   pollImmediately: true,
   pollInterval: null,
   tickInterval: null,
-  defaultPollInterval: 10000,
+  defaultPollInterval: ENV.clockPollInterval || 10000,
   defaultTickInterval: 1000,
 
   init: function () {
