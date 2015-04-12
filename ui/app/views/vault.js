@@ -25,7 +25,7 @@ export default Ember.View.extend({
   watchSealStatus: function() {
     // Ensure that we don't have a flash of 0 progress
     if (this.get('unsealed') === true) {
-      this.set('controller.model.progress', this.get('controller.model.t'))
+      this.set('controller.model.progress', this.get('controller.model.t'));
     }
 
 
