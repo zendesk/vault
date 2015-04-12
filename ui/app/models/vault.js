@@ -9,5 +9,17 @@ export default DS.Model.extend({
   n: attr('number'),
   progress: attr('number'),
 
+  total: function() {
+    // If the Vault is unsealed, we want to pretend
+    // for the UI that the total number of necessary
+    // shared are entered.
+    //
+    if (this.get('unsealed') === true) {
+      return this.get('n');
+    }
+
+    return this.get('t')
+  },
+
   unsealed: Ember.computed.equal('sealed', false),
 });
