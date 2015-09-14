@@ -30,6 +30,8 @@ func handleLogical(core *vault.Core, dataOnly bool) http.Handler {
 			op = logical.DeleteOperation
 		case "GET":
 			op = logical.ReadOperation
+		case "LIST":
+			op = logical.ListOperation
 		case "POST":
 			fallthrough
 		case "PUT":
