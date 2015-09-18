@@ -42,15 +42,6 @@ func PassthroughBackendFactory(conf *logical.BackendConfig) (logical.Backend, er
 				HelpDescription: strings.TrimSpace(passthroughHelpDescription),
 			},
 		},
-
-		Secrets: []*framework.Secret{
-			&framework.Secret{
-				Type: "generic",
-
-				Renew:  b.handleRead,
-				Revoke: b.handleRevoke,
-			},
-		},
 	}
 
 	if conf == nil {
@@ -95,8 +86,9 @@ func (b *PassthroughBackend) handleRead(
 	}
 
 	// Generate the response
-	resp := b.Secret("generic").Response(rawData, nil)
-	resp.Secret.Renewable = false
+	resp := &logical.Response{
+		Data: rawData,
+	}
 
 	// Check if there is a ttl key
 	var ttl string
@@ -108,7 +100,7 @@ func (b *PassthroughBackend) handleRead(
 	if len(ttl) != 0 {
 		ttlDuration, err := time.ParseDuration(ttl)
 		if err == nil {
-			resp.Secret.Renewable = true
+			resp.Secret = &logical.Secret{}
 			resp.Secret.TTL = ttlDuration
 		}
 	}
@@ -121,6 +113,19 @@ func (b *PassthroughBackend) handleWrite(
 	// Check that some fields are given
 	if len(req.Data) == 0 {
 		return nil, fmt.Errorf("missing data fields")
+	}
+
+	// Sanity check
+	var ttl string
+	ttl = data.Get("lease").(string)
+	if len(ttl) == 0 {
+		ttl = data.Get("ttl").(string)
+	}
+	if len(ttl) != 0 {
+		_, err := time.ParseDuration(ttl)
+		if err != nil {
+			return logical.ErrorResponse(fmt.Sprintf("Invalid duration '%s'", ttl)), nil
+		}
 	}
 
 	// JSON encode the data

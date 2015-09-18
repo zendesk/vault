@@ -503,15 +503,25 @@ func (c *Core) handleRequest(req *logical.Request) (retResp *logical.Response, r
 			resp.Secret.TTL = maxTTL
 		}
 
-		// Register the lease
-		leaseID, err := c.expiration.Register(req, resp)
-		if err != nil {
-			c.logger.Printf(
-				"[ERR] core: failed to register lease "+
-					"(request: %#v, response: %#v): %v", req, resp, err)
+		mountEntry := c.router.MatchingMountEntry(req.Path)
+		if mountEntry == nil {
+			c.logger.Println("[ERR] core: unable to retrieve mount entry from router")
 			return nil, auth, ErrInternalError
 		}
-		resp.Secret.LeaseID = leaseID
+
+		// Generic mounts should return the TTL but not register
+		// it, as this provides a massive slowdown.
+		if mountEntry.Type != "generic" {
+			// Register the lease
+			leaseID, err := c.expiration.Register(req, resp)
+			if err != nil {
+				c.logger.Printf(
+					"[ERR] core: failed to register lease "+
+						"(request: %#v, response: %#v): %v", req, resp, err)
+				return nil, auth, ErrInternalError
+			}
+			resp.Secret.LeaseID = leaseID
+		}
 	}
 
 	// Only the token store is allowed to return an auth block, for any
